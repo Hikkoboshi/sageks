@@ -1,0 +1,36 @@
+{% extends 'sageks_store/base.html' %}
+{% load static %}
+
+{% block title %}Каталог{% endblock %}
+
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Каталог</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <h1>Каталог</h1>
+    <div>
+        {% if products %}
+        <section>
+            <div class="row">
+                {% for product in products %}
+                <div class="card col-sm-6 product-card">
+                  <img src="{% static 'images/no_image.png'%}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'productPage' pk=product.pk %}">{{ product.name }}</a></h5>
+                    <p class="card-text">{{ product.price }} ₽</p>
+                    <a href="#" class="btn btn-primary">В корзину</a>
+                  </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% else %}
+            <h3>Товары не найдены.</h3>
+        {% endif %}
+    </div>
+{% endblock %}
